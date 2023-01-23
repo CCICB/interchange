@@ -14,3 +14,5 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
 biocViews:
+URL: https://github.com/selkamand/interchange
+BugReports: https://github.com/selkamand/interchange/issues
