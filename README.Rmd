@@ -16,11 +16,12 @@ knitr::opts_chunk$set(
 # interchange
 
 <!-- badges: start -->
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![CRAN status](https://www.r-pkg.org/badges/version/interchange)](https://CRAN.R-project.org/package=interchange)
+
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental) [![CRAN status](https://www.r-pkg.org/badges/version/interchange)](https://CRAN.R-project.org/package=interchange)
+
 <!-- badges: end -->
 
-The goal of interchange is to ...
+The interchange R package provides functions for converting between common biological filetypes
 
 ## Installation
 
@@ -33,8 +34,14 @@ remotes::install_github('selkamand/interchange')
 
 ## Usage
 
-```{r example}
+```{r example, eval = FALSE}
 library(interchange)
 
-gistic_to_crux
+convert_x_to_y
 ```
+
+Supported Usages
+
+-   GISTIC2 -\> Maftools
+
+-   GISTIC2 -\> CRUX

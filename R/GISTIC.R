@@ -3,7 +3,7 @@
 #' @inheritParams maftools::readGistic
 #' @inherit maftools::readGistic return
 #'
-gistic_to_maftools <- function(gisticAllLesionsFile, gisticAmpGenesFile, gisticDelGenesFile, gisticScoresFile,
+convert_gistic_to_maftools <- function(gisticAllLesionsFile, gisticAmpGenesFile, gisticDelGenesFile, gisticScoresFile,
                                cnLevel = c("all", "deep", "shallow"), isTCGA = FALSE, verbose = TRUE){
   requireNamespace("maftools", quietly = TRUE)
   cnLevel <- rlang::arg_match(cnLevel)
@@ -30,7 +30,7 @@ gistic_to_maftools <- function(gisticAllLesionsFile, gisticAmpGenesFile, gisticD
 #' @return NULL, invisibly
 #'
 #' @export
-gistic_files_to_crux <- function(gisticAllLesionsFile, gisticAmpGenesFile, gisticDelGenesFile, gisticScoresFile, outfile,
+convert_gistic_files_to_crux <- function(gisticAllLesionsFile, gisticAmpGenesFile, gisticDelGenesFile, gisticScoresFile, outfile,
                            cnLevel = c("all", "deep", "shallow"), isTCGA = FALSE, verbose = TRUE, compress = c("gzip", "bzip2", "xz", "none")){
 
   # Parse Arguments
@@ -39,7 +39,7 @@ gistic_files_to_crux <- function(gisticAllLesionsFile, gisticAmpGenesFile, gisti
   if(compress == "none") compress <- FALSE
 
   # Create maftools gistic object
-  maftools_gistic_object <- gistic_to_maftools(gisticAllLesionsFile = gisticAllLesionsFile,
+  maftools_gistic_object <- convert_gistic_to_maftools(gisticAllLesionsFile = gisticAllLesionsFile,
                                                 gisticAmpGenesFile = gisticAmpGenesFile,
                                                 gisticDelGenesFile = gisticDelGenesFile,
                                                 gisticScoresFile = gisticScoresFile,
@@ -56,8 +56,8 @@ gistic_files_to_crux <- function(gisticAllLesionsFile, gisticAmpGenesFile, gisti
 #' Create Crux-compatible GISTIC RDS file
 #'
 #' @param gistic_folder path to a folder containing gistic output files
-#' @inheritParams gistic_files_to_crux
-#' @inheritDotParams gistic_files_to_crux
+#' @inheritParams convert_gistic_files_to_crux
+#' @inheritDotParams convert_gistic_files_to_crux
 #'
 #' @return NULL, invisibly.
 #' @export
@@ -76,7 +76,7 @@ gistic_folder_to_crux <- function(gistic_folder, outfile, ...){
   #browser()
   # add some assertions maybe
 
-  gistic_files_to_crux(
+  convert_gistic_files_to_crux(
     gisticAllLesionsFile = path_all_lesions,
     gisticAmpGenesFile = path_amp_genes,
     gisticDelGenesFile = path_del_genes,
@@ -113,11 +113,11 @@ assert_file_permission <- assertions::assert_create_chain(
 #'
 #' @param gistic_zip path to gistic zip file
 #' @param outfile path to write CRUX RDS to
-#' @inheritDotParams gistic_files_to_crux
+#' @inheritDotParams convert_gistic_files_to_crux
 #' @return Run for its side effects (creation of an RDS crux gistic at path 'outfile')
 #' @export
 #'
-gistic_tar_to_crux <- function(gistic_tar, outfile, ...){
+convert_gistic_tar_to_crux <- function(gistic_tar, outfile, ...){
   assert_file_exists(gistic_tar)
   assert_file_permission(dirname(gistic_tar), permission = "write")
   assert_file_permission(dirname(outfile), permission = "write")
