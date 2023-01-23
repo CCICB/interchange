@@ -3,6 +3,7 @@
 #' @inheritParams maftools::readGistic
 #' @inherit maftools::readGistic return
 #'
+#' @export
 convert_gistic_to_maftools <- function(gisticAllLesionsFile, gisticAmpGenesFile, gisticDelGenesFile, gisticScoresFile,
                                cnLevel = c("all", "deep", "shallow"), isTCGA = FALSE, verbose = TRUE){
   requireNamespace("maftools", quietly = TRUE)
@@ -97,6 +98,8 @@ has_permission <- function(filepaths, permission = c('write', 'execute', 'read')
   else return(FALSE)
 }
 
+assert_file_does_not_exist <- assertions::assert_create(func = function(x) {!file.exists(x)}, default_error_msg = "File already exists: {.file {arg_value}}. Please remove then try again")
+
 assert_file_permission <- assertions::assert_create_chain(
   assert_file_exists,
   assertions::assert_create(
@@ -111,8 +114,8 @@ assert_file_permission <- assertions::assert_create_chain(
 #'
 #' Create Crux-compatible GISTIC RDS file
 #'
-#' @param gistic_zip path to gistic zip file
-#' @param outfile path to write CRUX RDS to
+#' @param gistic_tar path to gistic tar file (can be gzip compressed)
+#' @param outfile path to write CRUX RDS
 #' @inheritDotParams convert_gistic_files_to_crux
 #' @return Run for its side effects (creation of an RDS crux gistic at path 'outfile')
 #' @export
@@ -124,13 +127,17 @@ convert_gistic_tar_to_crux <- function(gistic_tar, outfile, ...){
 
   # name of folder to extract files to
   gistic_folder <-  tools::file_path_sans_ext(x = gistic_tar, compression = TRUE)
+  assert_file_does_not_exist(gistic_folder)
 
   # Unzip
-  untar(gistic_tar, exdir = dirname(gistic_tar))
+  utils::untar(gistic_tar, exdir = dirname(gistic_tar))
+
 
   # Create
   gistic_folder_to_crux(gistic_folder, outfile = outfile, ...)
 
+  # Messages
+  cli::cli_alert_info("deleting untarred folder: {.file {gistic_folder}}")
 
 }
 

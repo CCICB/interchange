@@ -16,3 +16,10 @@ RoxygenNote: 7.2.1
 biocViews:
 URL: https://github.com/selkamand/interchange
 BugReports: https://github.com/selkamand/interchange/issues
+Imports: 
+    assertions (>= 0.0.0.9000),
+    cli,
+    rlang,
+    utils
+Remotes: 
+    selkamand/assertions

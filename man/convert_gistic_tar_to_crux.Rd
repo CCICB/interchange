@@ -7,7 +7,9 @@
 convert_gistic_tar_to_crux(gistic_tar, outfile, ...)
 }
 \arguments{
-\item{outfile}{path to write CRUX RDS to}
+\item{gistic_tar}{path to gistic tar file (can be gzip compressed)}
+
+\item{outfile}{path to write CRUX RDS}
 
 \item{...}{
   Arguments passed on to \code{\link[=convert_gistic_files_to_crux]{convert_gistic_files_to_crux}}
@@ -21,8 +23,6 @@ convert_gistic_tar_to_crux(gistic_tar, outfile, ...)
     \item{\code{isTCGA}}{Is the data from TCGA. Default FALSE.}
     \item{\code{verbose}}{Default TRUE}
   }}
-
-\item{gistic_zip}{path to gistic zip file}
 }
 \value{
 Run for its side effects (creation of an RDS crux gistic at path 'outfile')
