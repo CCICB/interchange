@@ -32,7 +32,7 @@ library(interchange)
 convert_x_to_y
 ```
 
-Supported Usages
+Supported Conversions
 
 -   GISTIC2 -\> Maftools
 
