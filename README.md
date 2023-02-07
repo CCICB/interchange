@@ -32,8 +32,11 @@ library(interchange)
 convert_x_to_y
 ```
 
-Supported Conversions
+### Supported Conversions
 
--   GISTIC2 -\> Maftools
-
--   GISTIC2 -\> CRUX
+``` r
+library(interchange)
+supported_conversions()
+#>    Input Output
+#> 1 GISTIC   CRUX
+```

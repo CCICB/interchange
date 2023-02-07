@@ -40,8 +40,11 @@ library(interchange)
 convert_x_to_y
 ```
 
-Supported Usages
 
--   GISTIC2 -\> Maftools
+### Supported Conversions
 
--   GISTIC2 -\> CRUX
+```{r}
+library(interchange)
+supported_conversions()
+```
+

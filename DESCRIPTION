@@ -12,7 +12,7 @@ Suggests:
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 biocViews:
 URL: https://github.com/selkamand/interchange
 BugReports: https://github.com/selkamand/interchange/issues
