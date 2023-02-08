@@ -127,11 +127,19 @@ convert_gistic_tar_to_crux <- function(gistic_tar, outfile, ...){
 
   # name of folder to extract files to
   gistic_folder <-  tools::file_path_sans_ext(x = gistic_tar, compression = TRUE)
+
+
+  # Figure out what folder your going to get
+  untarred = sub(
+    x=utils::untar(gistic_tar, list = TRUE),
+    pattern = "\\/.*$",
+    replacement = ""
+  )[1]
+  gistic_folder = paste0(dirname(gistic_tar), "/",untarred)
   assert_file_does_not_exist(gistic_folder)
 
   # Unzip
   utils::untar(gistic_tar, exdir = dirname(gistic_tar))
-
 
   # Create
   gistic_folder_to_crux(gistic_folder, outfile = outfile, ...)
