@@ -87,7 +87,6 @@ gistic_folder_to_crux <- function(gistic_folder, outfile, ...){
   )
 }
 
-assert_file_exists <- assertions::assert_create(func = file.exists, default_error_msg = "Could not find file: {.file {arg_name}}")
 has_permission <- function(filepaths, permission = c('write', 'execute', 'read')){
   permission_to_mode <- c('write'=2, 'execute'=1, 'read'=4)
   permission <- rlang::arg_match(permission)
@@ -99,14 +98,6 @@ has_permission <- function(filepaths, permission = c('write', 'execute', 'read')
 }
 
 assert_file_does_not_exist <- assertions::assert_create(func = function(x) {!file.exists(x)}, default_error_msg = "File already exists: {.file {arg_value}}. Please remove then try again")
-
-assert_file_permission <- assertions::assert_create_chain(
-  assert_file_exists,
-  assertions::assert_create(
-    func = has_permission,
-    default_error_msg = "No permission to {permission} file/folder {.file {arg_name}}"
-  )
-)
 
 
 
@@ -121,9 +112,7 @@ assert_file_permission <- assertions::assert_create_chain(
 #' @export
 #'
 convert_gistic_tar_to_crux <- function(gistic_tar, outfile, ...){
-  assert_file_exists(gistic_tar)
-  assert_file_permission(dirname(gistic_tar), permission = "write")
-  assert_file_permission(dirname(outfile), permission = "write")
+  assertions::assert_file_exists(gistic_tar)
 
   # name of folder to extract files to
   gistic_folder <-  tools::file_path_sans_ext(x = gistic_tar, compression = TRUE)
@@ -136,7 +125,7 @@ convert_gistic_tar_to_crux <- function(gistic_tar, outfile, ...){
     replacement = ""
   )[1]
   gistic_folder = paste0(dirname(gistic_tar), "/",untarred)
-  assert_file_does_not_exist(gistic_folder)
+  assertions::assert_file_does_not_exist(gistic_folder)
 
   # Unzip
   utils::untar(gistic_tar, exdir = dirname(gistic_tar))
