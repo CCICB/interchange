@@ -114,7 +114,7 @@ assert_file_does_not_exist <- assertions::assert_create(func = function(x) {!fil
 convert_gistic_tar_to_crux <- function(gistic_tar, outfile, ...){
   assertions::assert_file_exists(gistic_tar)
 
-  # name of folder to extract files to
+  # Name of folder to extract files to
   gistic_folder <-  tools::file_path_sans_ext(x = gistic_tar, compression = TRUE)
 
 
